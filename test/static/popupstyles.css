@@ -1,0 +1,113 @@
+body {
+    width: 480px; 
+    height: 656px; 
+    margin: 0; 
+    padding: 0;
+    font-family: Helvetica, Sans-serif;
+    text-align: center; 
+}
+
+.tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 3px; 
+    border-radius: 5px; 
+}
+
+.logo {
+    height: 30px; 
+}
+
+.exit-button {
+    background: none; /* No background */
+    border: none; /* No border */
+    color: black; /* Text color */
+    font-size: 14px; /* Adjust the font size for visibility */
+    cursor: pointer; /* Pointer cursor on hover */
+    width: 25px; /* Set a fixed width for the button */
+    height: 25px; /* Set a fixed height for the button */
+    text-align: center; /* Center the text inside the button */
+    line-height: 25px; /* Vertically center the "X" */
+    padding: 0; /* Remove any default padding */
+}
+
+
+.colored-box {
+    display: grid;
+    font-size: 28px;
+    background-color: #aac0ab;
+    width: 100%; /* Make this full-width relative to the body */
+    height: 200px;
+    padding: 50px 20px 20px;
+    color: black;
+    text-align: center;
+    border-radius: 0px;
+    margin: 0 auto;
+}
+
+.colored-box h1 {
+    text-align: center;
+    margin-bottom: 0px; /* Reduce space under h1 */
+}
+
+.colored-box p {
+    text-align: center;
+    font-size: 14px;
+    margin: 5px 0 0 0; /* Remove excess margin */
+}
+
+#auth-container {
+    margin-top: 20px;
+    text-align: left; /* Left-align the labels */
+    padding: 20px; /* Add some padding to the sides */
+}
+
+label {
+    display: block;
+    margin-bottom: 5px; 
+    font-weight: bold;
+}
+
+input {
+    width: 420px;
+    padding: 10px;
+    margin-bottom: 15px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc;
+}
+
+button {
+    width: 100%; 
+    padding: 10px; 
+    background-color: #aac0ab; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer; 
+    margin-bottom: 15px;
+}
+
+button:hover {
+    background-color: #88a78e; /* Darken color on hover */
+}
+
+/* Align Sign Up and Forgot Password links side by side */
+#link-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#forgot-password, #signup-button {
+    color: #007BFF; 
+    text-decoration: none;
+    text-align: center; 
+    font-size: 14px;
+    display: inline-block; /* Ensure inline-block behavior for both */
+}
+
+#forgot-password:hover, #signup-button:hover {
+    text-decoration: underline;
+}

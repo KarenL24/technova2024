@@ -1,0 +1,141 @@
+<!doctype html>
+<link href="../static/style.css" rel="stylesheet" type="text/css" />
+<h2>Select a file to upload</h2>
+<h2>Select a Value</h2>
+<script src="../static/background.js"></script>
+<script>
+    function updateValue(value) {
+        // Display the current slider value (optional)
+        document.getElementById("slider-value").innerText = value;
+
+        // Send the updated value to the Flask server
+        fetch('/update-slider', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ value: value })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                console.log("Slider value updated successfully:", data.value);
+            } else {
+                console.error("Failed to update slider value");
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
+
+<input type="range" id="slider" name="slider" min="0" max="100" value="50" oninput="updateValue(this.value)">
+<p>Current Slider Value: <span id="slider-value">50</span></p>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+<div class="container">
+    <div class="left-div">
+        {% if filename %}
+    
+            <div>
+                <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Image" style="height:340px">
+            </div>
+        {% endif %}
+        <form method="post" action="/" enctype="multipart/form-data">
+            <dl>
+                <p>
+                    <input type="file" name="file" autocomplete="off" required>
+                </p>
+            </dl>
+            <p>
+                <input type="submit" value="Submit">
+            </p>
+    
+        
+        </form>
+    </div>
+    
+    <div class="right-div">
+        <div class="block">
+            {% if img1 and sim1 %}
+            <div class="left-div">
+                <img src="{{ url_for('static', filename='database/' + img1) }}" style="height:100px">
+            </div>
+            <div class="right-div">
+                <p>
+                    Similarity Score: {{ sim1 }}
+                </p>
+                <p>
+                    Kilograms of CO2 saved: {{data[img1]["CO2"]}}
+                </p>
+                <p>
+                    Litres of water saved: {{data[img1]["CO2"]}}
+                </p>
+                <p>
+                    Distance from you: {{data[img1]["distance"]}} km
+                </p>
+            </div>
+            <div class="right-div">
+                <button onclick="window.location.href='{{ data[img1]['url'] }}'">Buy</button>
+            </div>
+            {% endif %}
+        </div>
+        <div class="block">
+            {% if img2 and sim2 %}
+            <div class="left-div">
+                <img src="{{ url_for('static', filename='database/' + img2) }}" style="height:100px">
+            </div>
+            <div class="right-div">
+                <p>
+                    Similarity Score: {{ sim2 }}
+                </p>
+                <p>
+                    Kilograms of CO2 saved: {{data[img2]["CO2"]}}
+                </p>
+                <p>
+                    Litres of water saved: {{data[img2]["CO2"]}}
+                </p>
+                <p>
+                    Distance from you: {{data[img2]["distance"]}} km
+                </p>
+            </div>
+            <div class="right-div">
+                <button onclick="window.location.href='{{ data[img2]['url'] }}'">Buy</button>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="block">
+            {% if img3 and sim3 %}
+            <div class="left-div">
+                <img src="{{ url_for('static', filename='database/' + img3) }}" style="height:100px">
+            </div>
+            <div class="right-div">
+                <p>
+                    Similarity Score: {{ sim3 }}
+                </p>
+                <p>
+                    Kilograms of CO2 saved: {{data[img3]["CO2"]}}
+                </p>
+                <p>
+                    Litres of water saved: {{data[img3]["CO2"]}}
+                </p>
+                <p>
+                    Distance from you: {{data[img3]["distance"]}} km
+                </p>
+            </div>
+            <div class="right-div">
+                <button onclick="window.location.href='{{ data[img3]['url'] }}'">Buy</button>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

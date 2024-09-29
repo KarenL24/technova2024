@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReWear Popup</title>
+    <link rel="stylesheet" href="../static/popupstyles.css">
+    <script src="../background.js"></script>
+    <script src="script.js" defer></script> <!-- Include your custom script for handling login -->
+</head>
+
+<body>
+    <div class="tab">
+        <img src="icon.png" alt="Logo" class="logo"> <!-- Ensure icon.png is in the same directory -->
+        <button class="exit-button">X</button>
+    </div>
+
+    <div class="colored-box">
+        <h1>ReWear</h1>
+        <p>Small changes make a big difference.</p>
+    </div>
+
+    <div id="auth-container">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+        
+        <button id="login-button"  onclick="window.location.href= 'http://127.0.0.1:5000/find'">Sign In</button>
+        
+        <p id="message"></p> <!-- Display login messages here -->
+        
+        <p><a href="#" id="forgot-password">Forgot Password?</a></p>
+        <p><a href="#" id="signup-button">Sign Up</a></p>
+    </div>
+</body>
+</html>

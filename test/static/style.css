@@ -1,0 +1,26 @@
+/* Basic layout for two columns */
+.container {
+    display: flex;
+}
+
+/* First column styling (left column) */
+.left-div {
+    flex: 1; /* Takes up equal space as right div */
+    background-color: lightblue;
+    padding: 20px;
+}
+
+/* Second column styling (right column with 3 blocks) */
+.right-div {
+    flex: 1; /* Takes up equal space as left div */
+    background-color: lightgreen;
+    padding: 20px;
+}
+.block {
+    display:flex;
+    flex: 2; /* Takes up equal space as left div */
+    background-color: yellow;
+    padding: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,40 @@
+{
+    "P0.jpg" :{
+        "url" : "https://www.depop.com/products/killlcloset-vintage-90s-adidas-windbreaker-jacket/",
+        "cost" : 55.00,
+        "CO2" : 30.0,
+        "water" : 6000,
+        "distance": 56
+
+    },
+    "P0 (1).jpg" :{
+        "url" : "https://www.depop.com/products/libbobity-pink-knit-zipup-perfect-for/?moduleOrigin=selling_trends",
+        "cost" : 27.00,
+        "CO2" : 24.8,
+        "water" : 4000,
+        "distance" : 70
+    },
+    "P0 (2).jpg" :{
+        "url" : "https://www.depop.com/products/luckys_vintage-pink-knit-cottage-cardigan/",
+        "cost" : 35.00,
+        "CO2" : 25.0,
+        "water" : 200,
+        "distance" : 89
+    },
+    "P0 (3).jpeg" :{
+        "url" : "https://www.vinted.com/items/1367674388-fuzzy-pink-checkered-cardigan-50offbundles",
+        "cost" : 16.45,
+        "CO2" : 35.0,
+        "water" : 231,
+        "distance" : 60
+    },
+    "P0 (4).jpeg" :{
+        "url" : "https://www.vinted.com/items/5118221060-zip-up-soft-hoodie-xs?referrer=catalog",
+        "cost" : 8.05,
+        "CO2" : 32.0,
+        "water" : 31,
+        "distance" : 99
+    }
+
+
+}
