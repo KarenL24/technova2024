@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shipping Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: rgba(98, 125, 98, 0.546);
+
+        }
+
+        .get-status-button {
+            background-color: peachpuff;
+            color: black; /* For better visibility */
+            width: 100px;
+            height: 35px;
+            margin-left: 10px; /* Space between order text and button */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer; /* Change cursor on hover */
+        }
+
+        .orderid-input {
+            margin-bottom: 20px; /* Adjusted for spacing */
+            color: white; /* For visibility */
+            font-size: medium;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .status-info {
+            color: white; /* For visibility */
+            font-size: larger;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .orders-display {
+            color: white; /* For visibility */
+            font-size: larger;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .order-item {
+            display: flex; /* Flexbox for alignment */
+            align-items: center; /* Center align vertically */
+            margin-bottom: 10px; /* Space between order items */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="orderid-input">
+        <label>OrderID:</label>
+        <input type="text" id="user-input" placeholder="OrderID" />
+    </div>
+
+    <button title="Create Order" class="get-status-button" id="createOrderBtn">
+        Create Order
+    </button>
+
+    <div class="orders-display">Orders:</div>
+    <div id="ordersList" class="orders-display"></div>
+
+    <div id="status" class="status-info"></div>
+
+    <script>
+        const shippingState = {
+            1: { Status: "Pending" },
+            2: { Status: "Shipped" },
+            3: { Status: "Delivered" }
+        };
+
+        const states = ["Pending", "Shipped", "Delivered"]; // Array of states
+
+        const getShipmentState = (orderId) => {
+            if (!orderId) {
+                alert("Please enter your OrderID");
+                return null; 
+            } else if (![1, 2, 3].includes(Number(orderId))) {
+                return null; // Return null for invalid order IDs
+            } else {
+                return shippingState[orderId].Status;
+            }
+        };
+
+        // Create Order Function
+        document.getElementById('createOrderBtn').addEventListener('click', () => {
+            const userInput = document.getElementById("user-input").value;
+            if (!userInput) {
+                alert("Please enter your OrderID");
+                return;
+            }
+
+            // Create a new order item with a button
+            const ordersList = document.getElementById('ordersList');
+            const orderItem = document.createElement('div');
+            orderItem.className = 'order-item';
+            orderItem.innerHTML = `
+                <span>Order ID: ${userInput}</span>
+                <button class="get-status-button" onclick="checkStatus(${userInput})">
+                    Check Status
+                </button>
+            `;
+
+            // Append the new order item to the orders list
+            ordersList.appendChild(orderItem);
+            document.getElementById("user-input").value = ""; // Clear input after creating an order
+        });
+
+        function checkStatus(orderId) {
+            const currentStatus = getShipmentState(orderId); // Get the initial status
+
+            if (currentStatus === null) {
+                // If orderId is not valid, loop through states
+                loopThroughStates();
+            } else {
+                // Otherwise, show the valid status
+                document.getElementById('status').innerText = `Status: ${currentStatus}`; // Display initial status
+            }
+        }
+
+        // Function to loop through states every 10 seconds
+        function loopThroughStates() {
+            let currentIndex = 0; // Start from the first state
+            document.getElementById('status').innerText = `Status: ${states[currentIndex]}`;
+            const intervalId = setInterval(() => {
+                currentIndex++; // Move to the next state
+                if (currentIndex < states.length) {
+                    document.getElementById('status').innerText = `Status: ${states[currentIndex]}`;
+                } else {
+                    clearInterval(intervalId); // Stop updating after the last state
+                }
+            }, 5000); // Update every 10 seconds
+        }
+    </script>
+</body>
+</html>
