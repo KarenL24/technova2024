@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "ReWear",
+    "version": "1.0",
+    "permissions": [],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.png"
+    },
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_security_policy": {
+      "extension_pages": "script-src 'self' https://www.unpkg.com; object-src 'self'"
+    }
+  }
+  
