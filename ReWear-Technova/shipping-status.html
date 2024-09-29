@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shipment Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: rgba(98, 125, 98, 0.546);
+        }
+
+        .get-status-button {
+            background-color: peachpuff;
+            color: black;
+            width: 100px;
+            height: 35px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .orderid-input {
+            margin-bottom: 20px;
+            color: white;
+            font-size: medium;
+            font-weight: bold;
+            border-radius: 10px;
+        }
+
+        .status-info {
+            color: white;
+            font-size: larger;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .orders-display {
+            color: white;
+            font-size: larger;
+            font-weight: bold;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .order-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+    </style>
+    <script type="module">
+        import mockBlockchain from './blockchain/mock-blockchain.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('createOrderBtn').onclick = () => {
+                const orderID = document.getElementById('orderID').value;
+                if (!orderID) {
+                    alert("Please enter an Order ID");
+                    return;
+                }
+
+                // Create order in the mock blockchain
+                mockBlockchain.createOrder(orderID);
+                alert(`Order ${orderID} created!`);
+
+                // Add the new order to the order list
+                const ordersList = document.getElementById('ordersList');
+                const orderItem = document.createElement('div');
+                orderItem.className = 'order-item';
+                orderItem.innerHTML = `
+                    <span>Order ID: ${orderID}</span>
+                    <button class="get-status-button" onclick="checkStatus('${orderID}')">
+                        Check Status
+                    </button>
+                `;
+
+                // Append the new order item to the orders list
+                ordersList.appendChild(orderItem);
+                document.getElementById("orderID").value = ""; // Clear input after creating an order
+            };
+
+            document.getElementById('checkStatusBtn').onclick = () => {
+                const orderID = document.getElementById('checkOrderID').value;
+                if (!orderID) {
+                    alert("Please enter an Order ID");
+                    return;
+                }
+
+                const status = mockBlockchain.getOrderStatus(orderID);
+                if (status === -1) {
+                    document.getElementById('statusDisplay').innerText = `Order ${orderID} not found.`;
+                } else {
+                    document.getElementById('statusDisplay').innerText = `Current Status: ${['Pending', 'Shipped', 'Delivered'][status]}`;
+                }
+            };
+        });
+
+        // Global function to check status
+        window.checkStatus = (orderID) => {
+            const status = mockBlockchain.getOrderStatus(orderID);
+            if (status === -1) {
+                document.getElementById('statusDisplay').innerText = `Order ${orderID} not found.`;
+            } else {
+                document.getElementById('statusDisplay').innerText = `Current Status of Order ${orderID}: ${['Pending', 'Shipped', 'Delivered'][status]}`;
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <h1>Shipment Tracker</h1>
+
+    <div class="orderid-input">
+        <label>Order ID:</label>
+        <input type="text" id="orderID" placeholder="Enter Order ID" />
+    </div>
+    <button class="get-status-button" id="createOrderBtn">Create Order</button>
+
+    <div>
+        <p id="statusDisplay" class="status-info"></p>
+    </div>
+
+    <div class="orders-display">Orders:</div>
+    <div id="ordersList" class="orders-display"></div>
+</body>
+</html>
